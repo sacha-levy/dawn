@@ -1,0 +1,23 @@
+{%- if localization.available_languages.size > 1 -%}
+  <localization-form>
+    {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+      <div>
+        <h2 class="caption-large text-body" id="FooterLanguageLabel">
+          {{ 'localization.language_label' | t }}
+        </h2>
+        {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+      </div>
+    {%- endform -%}
+  </localization-form>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Language Selector",
+  "presets": [
+    {
+      "name": "Language Selector"
+    }
+  ]
+}
+{% endschema %}

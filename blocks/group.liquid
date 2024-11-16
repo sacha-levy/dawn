@@ -1,0 +1,58 @@
+{% style %}
+  .section-{{ section.id }}-{{ block.id }} {
+    width: 100%;
+    background-color: {{ block.settings.color_background }};
+  }
+{% endstyle %}
+
+<div
+  class="wrapper section-{{ section.id }}-{{ block.id }} {{ block.settings.spacing | class_list }} {{ block.settings.layout | class_list }}"
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Group",
+  "tag": "div",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    },
+    {
+      "type": "style.layout_panel",
+      "id": "layout",
+      "label": "Layout",
+      "default": {
+        "flex-direction": "column",
+        "gap": "20px"
+      }
+    },
+    {
+      "type": "style.spacing_panel",
+      "id": "spacing",
+      "label": "Spacing",
+      "default": {
+        "padding": "10px"
+      }
+    },
+    {
+      "type": "style.size_panel",
+      "id": "size",
+      "label": "Size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Group"
+    }
+  ]
+}
+{% endschema %}

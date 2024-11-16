@@ -1,0 +1,19 @@
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+<ul class="list list-payment" role="list">
+  {%- for type in shop.enabled_payment_types -%}
+    <li class="list-payment__item">
+      {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+    </li>
+  {%- endfor -%}
+</ul>
+
+{% schema %}
+{
+  "name": "Payment Types",
+  "presets": [
+    {
+      "name": "Payment Types"
+    }
+  ]
+}
+{% endschema %}

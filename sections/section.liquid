@@ -1,0 +1,91 @@
+<div
+  class="section-{{ section.id }} wrapper {{ section.settings.spacing | class_list }} {{ section.settings.layout | class_list }}"
+  style="
+            height: {{ section.settings.height }};
+        {% if section.settings.image_url %}
+          background-image: linear-gradient(rgba(0, 0, 0, {{ section.settings.image_opacity | divided_by: 100.0 }}), rgba(0, 0, 0, {{ section.settings.image_opacity | divided_by: 100.0 }})), url({{ section.settings.image_url | image_url: width: 1500 }});
+      background-size: cover;
+      background-position: center;
+    {% endif %}
+    background-color: {{ section.settings.color_background }};
+  "
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Section",
+  "tag": "section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_url",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Image Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "600px", "label": "Extra Large" },
+        { "value": "450px", "label": "Large" },
+        { "value": "300px", "label": "Medium" },
+        { "value": "150px", "label": "Small" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "style.layout_panel",
+      "id": "layout",
+      "label": "Layout",
+      "default": {
+        "flex-direction": "column"
+      }
+    },
+    {
+      "type": "style.spacing_panel",
+      "id": "spacing",
+      "label": "Spacing",
+      "default": {
+        "padding": "0px 20px"
+      }
+    },
+    {
+      "type": "style.size_panel",
+      "id": "size",
+      "label": "Size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section"
+    }
+  ]
+}
+{% endschema %}
