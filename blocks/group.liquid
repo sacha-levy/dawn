@@ -1,12 +1,17 @@
 {% style %}
-  .section-{{ section.id }}-{{ block.id }} {
+  .block-{{ block.id }} {
     width: 100%;
     background-color: {{ block.settings.color_background }};
   }
 {% endstyle %}
 
 <div
-  class="wrapper section-{{ section.id }}-{{ block.id }} {{ block.settings.spacing | class_list }} {{ block.settings.layout | class_list }}"
+  class="
+    wrapper block-{{ block.id }}
+    {{ block.settings.spacing | class_list }}
+    {{ block.settings.size | class_list }}
+    {{ block.settings.layout | class_list }}
+  "
 >
   {% content_for 'blocks' %}
 </div>
@@ -32,16 +37,13 @@
       "label": "Layout",
       "default": {
         "flex-direction": "column",
-        "gap": "20px"
+        "gap": "10px"
       }
     },
     {
       "type": "style.spacing_panel",
       "id": "spacing",
-      "label": "Spacing",
-      "default": {
-        "padding": "10px"
-      }
+      "label": "Spacing"
     },
     {
       "type": "style.size_panel",

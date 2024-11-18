@@ -1,9 +1,7 @@
 {% style %}
-  .block__button {
-    display: inline-block;
+  .block__button-{{ block.id }} {
     color: {{ block.settings.color }};
     background-color: {{ block.settings.color_background }};
-    text-decoration: none;
     border-style: {{ block.settings.border_style }};
     border-color: {{ block.settings.border_color }};
     border-width: {{ block.settings.border_width }}px;
@@ -18,6 +16,7 @@
   {% endif %}
   class="
     block__button
+    block__button-{{ block.id }}
     {{ block.settings.size }}
     {{ block.settings.spacing | class_list }}
     {{ block.settings.font_family }}

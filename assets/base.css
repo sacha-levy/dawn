@@ -642,8 +642,6 @@ h3 .icon-arrow,
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
 }
 
 .svg-wrapper>svg {
@@ -3606,4 +3604,11 @@ details-disclosure>details {
   100% {
     transform: translateX(100%) scaleX(0);
   }
+}
+
+/* New styles */
+
+.block__button {
+  display: inline-block;
+  text-decoration: none;
 }

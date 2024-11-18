@@ -1,10 +1,14 @@
 {% style %}
-  .block__text {
+  .block__text-{{ block.id }} {
     color: {{ block.settings.color }};
     background-color: {{ block.settings.color_background }};
+    border-style: {{ block.settings.border_style }};
+    border-color: {{ block.settings.border_color }};
+    border-width: {{ block.settings.border_width }}px;
+    border-radius: {{ block.settings.border_radius }}px;
   }
 
-  .block__text p {
+  .block__text-{{ block.id }} p {
     margin: 0;
   }
 {% endstyle %}
@@ -17,10 +21,12 @@
     {% endif %}
   {% endif %}
   class="
-    block__text
-    {{ block.settings.size }}
+    block__text-{{ block.id }}
+    {{ block.settings.font_size }}
     {{ block.settings.spacing | class_list }}
+    {{ block.settings.size | class_list }}
     {{ block.settings.font_family }}
+    {{ block.settings.text_alignment }}
   "
 >
   {{ block.settings.text }}
@@ -42,16 +48,30 @@
     },
     {
       "type": "select",
-      "id": "size",
-      "label": "Size",
+      "id": "font_size",
+      "label": "Font Size",
       "options": [
-        { "value": "hxxl", "label": "Extra Large" },
-        { "value": "hxl", "label": "Large" },
-        { "value": "h0", "label": "Medium" },
-        { "value": "h1", "label": "Small" },
-        { "value": "h2", "label": "Extra Small" }
+        { "value": "hxxl", "label": "XX-Large" },
+        { "value": "hxl", "label": "X-Large" },
+        { "value": "h0", "label": "Large" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h2", "label": "Small" },
+        { "value": "h3", "label": "X-Small" },
+        { "value": "h4", "label": "XX-Small" },
+        { "value": "h5", "label": "XXX-Small" }
       ],
-      "default": "h0"
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
     },
     {
       "type": "select",
@@ -74,6 +94,46 @@
       "type": "color",
       "id": "color_background",
       "label": "Background Color"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border Style",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border Width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
     },
     {
       "type": "header",
@@ -114,6 +174,11 @@
       "default": {
         "padding": "0px"
       }
+    },
+    {
+      "type": "style.size_panel",
+      "id": "size",
+      "label": "Size"
     }
   ],
   "presets": [

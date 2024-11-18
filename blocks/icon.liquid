@@ -1,9 +1,23 @@
-{%- render 'icon-accordion', icon: block.settings.icon -%}
+{% style %}
+  .icon-size-{{ block.settings.icon_size }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+  }
+{% endstyle %}
+
+{%- if block.settings.icon != 'none' -%}
+  {%- assign file = block.settings.icon | replace: '_', '-' | prepend: 'icon-' | append: '.svg' -%}
+  <span class="svg-wrapper icon-size-{{ block.settings.icon_size }}">{{ file | inline_asset_content }}</span>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Icon",
   "settings": [
+    {
+      "type": "header",
+      "content": "Icon"
+    },
     {
       "type": "select",
       "id": "icon",
@@ -191,6 +205,20 @@
       ],
       "default": "heart",
       "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_1.label"
+    },
+    {
+      "type": "header",
+      "content": "Size"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
     }
   ],
   "presets": [
